@@ -6,8 +6,8 @@ import jakarta.validation.constraints.NotBlank;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 import jakarta.validation.constraints.Email;
-import jakarta.validation.constraints.Max;
 import jakarta.validation.constraints.Pattern;
+import jakarta.validation.constraints.Size;
 
 @Data
 @JsonIgnoreProperties(ignoreUnknown = true, value = {"privacyAgreed"})
@@ -35,7 +35,7 @@ public class AppointmentRequest {
     @NotBlank(message = "Preferred time is required")
     private String preferredTime;
 
-    @Max(value = 150, message = "Notes cannot exceed 150 characters")
+    @Size(max= 150, message = "Notes cannot exceed 150 characters")
     private String notes;
 
     @NotBlank(message = "Captcha token is required")

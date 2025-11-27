@@ -31,6 +31,6 @@ public class CaptchaService {
         if (body == null)
             return false;
 
-        return body.isSuccess() && body.getScore() >= 0.5;
+        return body.isSuccess();
     }
 }
