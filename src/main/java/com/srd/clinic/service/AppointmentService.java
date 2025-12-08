@@ -1,6 +1,7 @@
 package com.srd.clinic.service;
 
 import com.srd.clinic.dto.AppointmentRequest;
+import com.srd.clinic.exception.ConfigurationException;
 import jakarta.mail.MessagingException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
@@ -30,7 +31,7 @@ public class AppointmentService {
 
 
         if (clinicEmail == null || clinicEmail.isBlank())
-            throw new RuntimeException("Clinic email is not configured (clinic.notification.email)");
+            throw new ConfigurationException("Clinic email is not configured (clinic.notification.email)");
 
         emailService.sendAppointmentEmailHtml(req, clinicEmail);
 

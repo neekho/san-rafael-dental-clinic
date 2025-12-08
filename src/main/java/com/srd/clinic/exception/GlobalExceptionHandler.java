@@ -14,6 +14,11 @@ public class GlobalExceptionHandler {
         return ResponseEntity.badRequest().body(new ApiError("VALIDATION_ERROR", msg));
     }
 
+    @ExceptionHandler(ConfigurationException.class)
+    public ResponseEntity<ApiError> handleConfiguration(ConfigurationException ex) {
+        return ResponseEntity.internalServerError().body(new ApiError("CONFIGURATION_ERROR", ex.getMessage()));
+    }
+
     @ExceptionHandler(RuntimeException.class)
     public ResponseEntity<ApiError> handleRuntime(RuntimeException ex) {
         return ResponseEntity.badRequest().body(new ApiError("ERROR", ex.getMessage()));

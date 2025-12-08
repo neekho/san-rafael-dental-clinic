@@ -37,6 +37,7 @@ public class EmailService {
             );
 
         helper.setText(html, true);
+        helper.setReplyTo(req.getEmail());
 
         mailSender.send(mimeMessage);
     }
