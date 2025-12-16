@@ -21,7 +21,7 @@ public class TimeValidator implements ConstraintValidator<ValidTime, String> {
         if (!TIME_PATTERN.matcher(trimmedValue).matches()) {
             context.disableDefaultConstraintViolation();
             context.buildConstraintViolationWithTemplate(
-                    "Invalid time format. Use format: HH:MM AM/PM (e.g., 12:00 PM or 01:30 AM)")
+                    "Invalid time format. Use 24-hour format HH:MM (e.g., 14:30, 09:00, 23:59)")
                     .addConstraintViolation();
             return false;
         }

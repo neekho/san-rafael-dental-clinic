@@ -24,10 +24,10 @@ public class AppointmentService {
 
     public void process(AppointmentRequest req) throws MessagingException {
 
-    // boolean validCaptcha = captchaService.verify(req.getCaptchaToken());
+    boolean validCaptcha = captchaService.verify(req.getCaptchaToken());
    
-    // if (!validCaptcha)
-    //     throw new RuntimeException("Invalid CAPTCHA");
+    if (!validCaptcha)
+        throw new RuntimeException("Invalid CAPTCHA");
 
     if (clinicEmail == null || clinicEmail.length == 0 || (clinicEmail.length == 1 && (clinicEmail[0] == null || clinicEmail[0].isBlank())))
         throw new ConfigurationException("Clinic email is not configured (clinic.notification.email)");
