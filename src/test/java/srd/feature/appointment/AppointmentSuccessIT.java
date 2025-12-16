@@ -24,8 +24,8 @@ class AppointmentSuccessIT extends ClinicApplicationTest {
         request.setEmail("john.doe@example.com");
         request.setMobile("09123456789");
         request.setService("General Consultation");
-        request.setPreferredDate("2024-12-10");
-        request.setPreferredTime("10:00 AM");
+        request.setPreferredDate("2025-12-20");
+        request.setPreferredTime("10:00");
         request.setNotes("Regular checkup");
         request.setCaptchaToken("valid-captcha-token");
 
@@ -33,7 +33,7 @@ class AppointmentSuccessIT extends ClinicApplicationTest {
         when(captchaService.verify(anyString())).thenReturn(true);
         
         // Mock the email service to do nothing (successful email send)
-        doNothing().when(emailService).sendAppointmentEmailHtml(any(AppointmentRequest.class), anyString());
+        doNothing().when(emailService).sendAppointmentEmailHtml(any(AppointmentRequest.class), any(String[].class));
 
         // When - Make the appointment request
         ResultActions ra = testApiSuccess(request, POST_APPOINTMENT);

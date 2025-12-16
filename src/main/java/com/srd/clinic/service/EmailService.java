@@ -2,8 +2,11 @@ package com.srd.clinic.service;
 
 import com.srd.clinic.dto.AppointmentRequest;
 import jakarta.mail.MessagingException;
+import jakarta.mail.internet.InternetAddress;
 import jakarta.mail.internet.MimeMessage;
 import lombok.RequiredArgsConstructor;
+
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.mail.javamail.MimeMessageHelper;
 import org.springframework.stereotype.Service;
@@ -18,11 +21,16 @@ public class EmailService {
 
     private final JavaMailSender mailSender;
 
-    public void sendAppointmentEmailHtml(AppointmentRequest req, String to) throws MessagingException {
+    @Value("${spring.mail.username}")
+    private String fromEmailSender;
+
+
+    public void sendAppointmentEmailHtml(AppointmentRequest req, String[] to) throws MessagingException {
 
         MimeMessage mimeMessage = mailSender.createMimeMessage();
         MimeMessageHelper helper = new MimeMessageHelper(mimeMessage, true, "UTF-8");
         
+        helper.setFrom(fromEmailSender);
         helper.setTo(to);
         helper.setSubject("New Appointment Request");
         String html = loadTemplate()
@@ -37,7 +45,7 @@ public class EmailService {
             );
 
         helper.setText(html, true);
-        helper.setReplyTo(req.getEmail());
+        helper.setReplyTo(new InternetAddress(req.getEmail()));
 
         mailSender.send(mimeMessage);
     }
@@ -52,3 +60,4 @@ public class EmailService {
         }
     }
 }
+

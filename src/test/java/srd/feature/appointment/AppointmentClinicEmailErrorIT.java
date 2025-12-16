@@ -26,8 +26,8 @@ class AppointmentClinicEmailErrorIT extends ClinicApplicationTest {
         request.setEmail("john.doe@example.com");
         request.setMobile("09123456789");
         request.setService("General Consultation");
-        request.setPreferredDate("2024-12-10");
-        request.setPreferredTime("10:00 AM");
+        request.setPreferredDate("2025-12-20");
+        request.setPreferredTime("10:00");
         request.setNotes("Regular checkup");
         request.setCaptchaToken("valid-captcha-token");
 
