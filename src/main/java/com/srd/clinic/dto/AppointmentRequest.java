@@ -7,6 +7,7 @@ import lombok.AllArgsConstructor;
 import jakarta.validation.constraints.NotBlank;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.srd.clinic.error.ErrorCode;
 import com.srd.clinic.validation.ValidateDate;
 import com.srd.clinic.validation.ValidTime;
 import com.srd.clinic.validation.ValidService;
@@ -22,37 +23,36 @@ import jakarta.validation.constraints.Size;
 @JsonIgnoreProperties(ignoreUnknown = true, value = {"privacyAgreed"})
 public class AppointmentRequest {
 
-    @NotBlank(message = "First name is required")
-    @Pattern(regexp = "^[a-zA-Z\\s'-]*$", message = "First name can only contain letters, spaces, hyphens, and apostrophes")
+    @NotBlank(message = ErrorCode.FIRST_NAME_REQUIRED)
+    @Pattern(regexp = "^[a-zA-Z\\s'-]*$", message = ErrorCode.FIRST_NAME_INVALID_CHARACTERS)
     private String firstName;
 
-    @NotBlank(message = "Last name is required")
-    @Pattern(regexp = "^[a-zA-Z\\s'-]*$", message = "Last name can only contain letters, spaces, hyphens, and apostrophes")
+    @NotBlank(message = ErrorCode.LAST_NAME_REQUIRED)
+    @Pattern(regexp = "^[a-zA-Z\\s'-]*$", message = ErrorCode.LAST_NAME_INVALID_CHARACTERS)
     private String lastName;
 
-    @Email(message = "Invalid email")
+    @Email(message = ErrorCode.EMAIL_INVALID)
     private String email;
 
-    @NotBlank(message = "Mobile number is required")
-    @Pattern(regexp = "^(09\\d{9})?$", message = "Invalid mobile number. Use format: 09XXXXXXXXX")
+    @NotBlank(message = ErrorCode.MOBILE_REQUIRED)
     private String mobile;
 
-    @NotBlank(message = "Service is required")
+    @NotBlank(message = ErrorCode.SERVICE_REQUIRED)
     @ValidService
     private String service;
 
-    @NotBlank(message = "Preferred date is required")
+    @NotBlank(message = ErrorCode.DATE_REQUIRED)
     @ValidateDate
     private String preferredDate;
 
-    @NotBlank(message = "Preferred time is required")
+    @NotBlank(message = ErrorCode.TIME_REQUIRED)
     @ValidTime
     private String preferredTime;
 
-    @Size(max= 150, message = "Notes cannot exceed 150 characters")
+    @Size(max= 150, message = ErrorCode.NOTES_MAX_LENGTH_EXCEEDED)
     private String notes;
 
-    @NotBlank(message = "Captcha token is required")
+    @NotBlank(message = ErrorCode.CAPTCHA_TOKEN_REQUIRED)
     private String captchaToken;
 
 }

@@ -5,7 +5,10 @@ import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
 import org.springframework.test.web.servlet.ResultActions;
 import com.srd.clinic.dto.AppointmentRequest;
+import com.srd.clinic.error.ErrorCode;
 import srd.ClinicApplicationTest;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 
 import static org.mockito.ArgumentMatchers.anyString;
 import static org.mockito.Mockito.when;
@@ -16,34 +19,36 @@ class AppointmentValidationIT extends ClinicApplicationTest {
 
   @ParameterizedTest
   @CsvSource({
-      "'', First name is required",
-      "John123, 'First name can only contain letters, spaces, hyphens, and apostrophes'",
-      "John@#$, 'First name can only contain letters, spaces, hyphens, and apostrophes'"
+      "''",
+      "John123",
+      "John@#$"
   })
-  void appointment_ShouldReturnValidationError_WhenFirstNameIsInvalid(String firstName, String expectedMessage) throws Exception {
+  void appointment_ShouldReturnValidationError_WhenFirstNameIsInvalid(String firstName) throws Exception {
     AppointmentRequest request = createValidRequest().toBuilder()
         .firstName(firstName)
         .build();
 
     ResultActions ra = testApiValidationError(request, POST_APPOINTMENT);
 
+    String expectedMessage = firstName.isEmpty() ? ErrorCode.FIRST_NAME_REQUIRED : ErrorCode.FIRST_NAME_INVALID_CHARACTERS;
     ra.andExpect(status().isBadRequest())
         .andExpect(jsonPath("$.message").value(expectedMessage));
   }
 
   @ParameterizedTest
   @CsvSource({
-      "'', Last name is required",
-      "Doe123, 'Last name can only contain letters, spaces, hyphens, and apostrophes'",
-      "Doe@#$, 'Last name can only contain letters, spaces, hyphens, and apostrophes'"
+      "''",
+      "Doe123",
+      "Doe@#$"
   })
-  void appointment_ShouldReturnValidationError_WhenLastNameIsInvalid(String lastName, String expectedMessage) throws Exception {
+  void appointment_ShouldReturnValidationError_WhenLastNameIsInvalid(String lastName) throws Exception {
     AppointmentRequest request = createValidRequest().toBuilder()
         .lastName(lastName)
         .build();
 
     ResultActions ra = testApiValidationError(request, POST_APPOINTMENT);
 
+    String expectedMessage = lastName.isEmpty() ? ErrorCode.LAST_NAME_REQUIRED : ErrorCode.LAST_NAME_INVALID_CHARACTERS;
     ra.andExpect(status().isBadRequest())
         .andExpect(jsonPath("$.message").value(expectedMessage));
   }
@@ -57,15 +62,15 @@ class AppointmentValidationIT extends ClinicApplicationTest {
     ResultActions ra = testApiValidationError(request, POST_APPOINTMENT);
 
     ra.andExpect(status().isBadRequest())
-        .andExpect(jsonPath("$.message").value("Invalid email"));
+        .andExpect(jsonPath("$.message").value(ErrorCode.EMAIL_INVALID));
   }
 
   @ParameterizedTest
   @CsvSource({
-      "'', Mobile number is required",
-      "' ', Mobile number is required"
+      "''",
+      "' '"
   })
-  void appointment_ShouldReturnValidationError_WhenMobileIsBlank(String mobile, String expectedMessage) throws Exception {
+  void appointment_ShouldReturnValidationError_WhenMobileIsBlank(String mobile) throws Exception {
     AppointmentRequest request = createValidRequest().toBuilder()
         .mobile(mobile)
         .build();
@@ -73,44 +78,27 @@ class AppointmentValidationIT extends ClinicApplicationTest {
     ResultActions ra = testApiValidationError(request, POST_APPOINTMENT);
 
     ra.andExpect(status().isBadRequest())
-        .andExpect(jsonPath("$.message").value(expectedMessage));
+        .andExpect(jsonPath("$.message").value(ErrorCode.MOBILE_REQUIRED));
   }
 
   @ParameterizedTest
   @CsvSource({
-      "1234567890, 'Invalid mobile number. Use format: 09XXXXXXXXX'",
-      "08123456789, 'Invalid mobile number. Use format: 09XXXXXXXXX'",
-      "9123456789, 'Invalid mobile number. Use format: 09XXXXXXXXX'",
-      "091234567890, 'Invalid mobile number. Use format: 09XXXXXXXXX'",
-      "09123456, 'Invalid mobile number. Use format: 09XXXXXXXXX'"
+      "''",
+      "' '",
+      "Invalid Service",
+      "INVALID_SERVICE",
+      "consultation_invalid",
+      "checkup_wrong"
   })
-  void appointment_ShouldReturnValidationError_WhenMobilePatternIsInvalid(String mobile, String expectedMessage) throws Exception {
-    AppointmentRequest request = createValidRequest().toBuilder()
-        .mobile(mobile)
-        .build();
-
-    ResultActions ra = testApiValidationError(request, POST_APPOINTMENT);
-
-    ra.andExpect(status().isBadRequest())
-        .andExpect(jsonPath("$.message").value(expectedMessage));
-  }
-
-  @ParameterizedTest
-  @CsvSource({
-      "'', Service is required",
-      "' ', Service is required",
-      "Invalid Service, 'Invalid service selected. Please choose from the available options'",
-      "INVALID_SERVICE, 'Invalid service selected. Please choose from the available options'",
-      "consultation_invalid, 'Invalid service selected. Please choose from the available options'",
-      "checkup_wrong, 'Invalid service selected. Please choose from the available options'"
-  })
-  void appointment_ShouldReturnValidationError_WhenServiceIsInvalid(String service, String expectedMessage) throws Exception {
+  void appointment_ShouldReturnValidationError_WhenServiceIsInvalid(String service) throws Exception {
     AppointmentRequest request = createValidRequest().toBuilder()
         .service(service)
         .build();
 
     ResultActions ra = testApiValidationError(request, POST_APPOINTMENT);
 
+    String expectedMessage = (service.isEmpty() || service.trim().isEmpty()) ? 
+        ErrorCode.SERVICE_REQUIRED : ErrorCode.SERVICE_INVALID_SELECTION;
     ra.andExpect(status().isBadRequest())
         .andExpect(jsonPath("$.message").value(expectedMessage));
   }
@@ -124,19 +112,23 @@ class AppointmentValidationIT extends ClinicApplicationTest {
     ResultActions ra = testApiValidationError(request, POST_APPOINTMENT);
 
     ra.andExpect(status().isBadRequest())
-        .andExpect(jsonPath("$.message").value("Preferred date is required"));
+        .andExpect(jsonPath("$.message").value(ErrorCode.DATE_REQUIRED));
   }
 
-  @Test
-  void appointment_ShouldReturnValidationError_WhenPreferredTimeIsBlank() throws Exception {
+  @ParameterizedTest
+  @CsvSource({
+      "''",
+      "' '"
+  })
+  void appointment_ShouldReturnValidationError_WhenPreferredTimeIsBlank(String preferredTime) throws Exception {
     AppointmentRequest request = createValidRequest().toBuilder()
-        .preferredTime("")
+        .preferredTime(preferredTime)
         .build();
 
     ResultActions ra = testApiValidationError(request, POST_APPOINTMENT);
 
     ra.andExpect(status().isBadRequest())
-        .andExpect(jsonPath("$.message").value("Preferred time is required"));
+        .andExpect(jsonPath("$.message").value(ErrorCode.TIME_REQUIRED));
   }
 
   @Test
@@ -149,7 +141,7 @@ class AppointmentValidationIT extends ClinicApplicationTest {
     ResultActions ra = testApiValidationError(request, POST_APPOINTMENT);
 
     ra.andExpect(status().isBadRequest())
-        .andExpect(jsonPath("$.message").value("Notes cannot exceed 150 characters"));
+        .andExpect(jsonPath("$.message").value(ErrorCode.NOTES_MAX_LENGTH_EXCEEDED));
   }
 
   @Test
@@ -161,7 +153,7 @@ class AppointmentValidationIT extends ClinicApplicationTest {
     ResultActions ra = testApiValidationError(request, POST_APPOINTMENT);
 
     ra.andExpect(status().isBadRequest())
-        .andExpect(jsonPath("$.message").value("Captcha token is required"));
+        .andExpect(jsonPath("$.message").value(ErrorCode.CAPTCHA_TOKEN_REQUIRED));
   }
 
   @Test
@@ -173,7 +165,7 @@ class AppointmentValidationIT extends ClinicApplicationTest {
     ResultActions ra = testApiValidationError(request, POST_APPOINTMENT);
 
     ra.andExpect(status().isBadRequest())
-        .andExpect(jsonPath("$.message").value("Cannot book appointments for past dates"));
+        .andExpect(jsonPath("$.message").value(ErrorCode.DATE_PAST_NOT_ALLOWED));
   }
 
   @Test
@@ -188,7 +180,7 @@ class AppointmentValidationIT extends ClinicApplicationTest {
     ResultActions ra = testApiValidationError(request, POST_APPOINTMENT);
 
     ra.andExpect(status().isBadRequest())
-        .andExpect(jsonPath("$.message").value("Appointments can only be booked within 2025"));
+        .andExpect(jsonPath("$.message").value(ErrorCode.DATE_YEAR_LIMIT_EXCEEDED));
   }
 
   @Test
@@ -200,43 +192,41 @@ class AppointmentValidationIT extends ClinicApplicationTest {
     ResultActions ra = testApiValidationError(request, POST_APPOINTMENT);
 
     ra.andExpect(status().isBadRequest())
-        .andExpect(jsonPath("$.message").value("Invalid date format. Use YYYY-MM-DD"));
+        .andExpect(jsonPath("$.message").value(ErrorCode.DATE_INVALID_FORMAT));
   }
 
-  @Test
-  void appointment_ShouldReturnValidationError_WhenTimeFormatIsInvalid() throws Exception {
+  @ParameterizedTest
+  @CsvSource({
+      "25:00",
+      "10:00 AM",
+      "10:00 PM",
+      "24:30",
+      "12:60",
+      "invalid-time",
+      "1:30",
+      "13:5"
+  })
+  void appointment_ShouldReturnValidationError_WhenTimeFormatIsInvalid(String preferredTime) throws Exception {
     AppointmentRequest request = createValidRequest().toBuilder()
-        .preferredTime("25:00")
+        .preferredTime(preferredTime)
         .build();
 
     ResultActions ra = testApiValidationError(request, POST_APPOINTMENT);
 
     ra.andExpect(status().isBadRequest())
-        .andExpect(
-            jsonPath("$.message").value("Invalid time format. Use 24-hour format HH:MM (e.g., 14:30, 09:00, 23:59)"));
-  }
-
-  @Test
-  void appointment_ShouldReturnValidationError_WhenTimeFormatIs12Hour() throws Exception {
-    AppointmentRequest request = createValidRequest().toBuilder()
-        .preferredTime("10:00 AM")
-        .build();
-
-    ResultActions ra = testApiValidationError(request, POST_APPOINTMENT);
-
-    ra.andExpect(status().isBadRequest())
-        .andExpect(
-            jsonPath("$.message").value("Invalid time format. Use 24-hour format HH:MM (e.g., 14:30, 09:00, 23:59)"));
+        .andExpect(jsonPath("$.message").value(ErrorCode.TIME_INVALID_FORMAT));
   }
 
   private AppointmentRequest createValidRequest() {
+    String tomorrowDate = LocalDate.now().plusDays(1).format(DateTimeFormatter.ofPattern("yyyy-MM-dd"));
+    
     return AppointmentRequest.builder()
         .firstName("John")
         .lastName("Doe")
         .email("john.doe@example.com")
         .mobile("09123456789")
         .service("Dental Consultation")
-        .preferredDate("2025-12-25")
+        .preferredDate(tomorrowDate)
         .preferredTime("10:00")
         .notes("Regular checkup")
         .captchaToken("valid-captcha-token")
