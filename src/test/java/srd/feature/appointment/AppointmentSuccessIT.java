@@ -18,22 +18,23 @@ class AppointmentSuccessIT extends ClinicApplicationTest {
     @Test
     void appointment_ShouldReturnSuccess() throws Exception {
         // Given - Create a valid appointment request
-        AppointmentRequest request = new AppointmentRequest();
-        request.setFirstName("John");
-        request.setLastName("Doe");
-        request.setEmail("john.doe@example.com");
-        request.setMobile("09123456789");
-        request.setService("General Consultation");
-        request.setPreferredDate("2024-12-10");
-        request.setPreferredTime("10:00 AM");
-        request.setNotes("Regular checkup");
-        request.setCaptchaToken("valid-captcha-token");
+        AppointmentRequest request = AppointmentRequest.builder()
+            .firstName("John")
+            .lastName("Doe")
+            .email("john.doe@example.com")
+            .mobile("09123456789")
+            .service("Dental Consultation")
+            .preferredDate("2025-12-25")
+            .preferredTime("10:00")
+            .notes("Regular checkup")
+            .captchaToken("valid-captcha-token")
+            .build();
 
         // Mock the captcha service to return true (valid captcha)
         when(captchaService.verify(anyString())).thenReturn(true);
         
         // Mock the email service to do nothing (successful email send)
-        doNothing().when(emailService).sendAppointmentEmailHtml(any(AppointmentRequest.class), anyString());
+        doNothing().when(emailService).sendAppointmentEmailHtml(any(AppointmentRequest.class), any(String[].class));
 
         // When - Make the appointment request
         ResultActions ra = testApiSuccess(request, POST_APPOINTMENT);
