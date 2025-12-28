@@ -33,8 +33,13 @@ public class EmailService {
         helper.setFrom(fromEmailSender);
         helper.setTo(to);
         helper.setSubject("New Appointment Request");
+        
+        // Format names to title case
+        String formattedFirstName = formatToTitleCase(req.getFirstName());
+        String formattedLastName = formatToTitleCase(req.getLastName());
+        
         String html = loadTemplate()
-            .replace("{{fullName}}", req.getFirstName() + " " + req.getLastName())
+            .replace("{{fullName}}", formattedFirstName + " " + formattedLastName)
             .replace("{{email}}", req.getEmail())
             .replace("{{mobile}}", req.getMobile())
             .replace("{{service}}", req.getService())
@@ -59,5 +64,21 @@ public class EmailService {
             throw new RuntimeException("Failed to load email template", e);
         }
     }
-}
 
+    /**
+     * Formats a name to title case (first letter capitalized, rest lowercase)
+     * Handles null and empty strings gracefully
+     * 
+     * @param name the name to format
+     * @return formatted name in title case
+     */
+    private String formatToTitleCase(String name) {
+        if (name == null || name.trim().isEmpty()) {
+            return "";
+        }
+        
+        String trimmedName = name.trim();
+        return trimmedName.substring(0, 1).toUpperCase() + 
+               trimmedName.substring(1).toLowerCase();
+    }
+}
