@@ -1,0 +1,10 @@
+# Robots.txt for San Rafael Dental Clinic Mandaluyong
+User-agent: *
+Allow: /
+
+# Sitemaps
+Sitemap: https://sanrafaeldental.com/sitemap.xml
+
+# Disallow admin areas (if any)
+Disallow: /admin/
+Disallow: /private/
