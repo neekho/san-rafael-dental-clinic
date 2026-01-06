@@ -229,7 +229,7 @@ export default function AppointmentForm() {
     try {
       setSubmitting(true)
 
-      const res = await fetch("http://localhost:8080/api/v1/appointments", {
+      const res = await fetch("https://san-rafael-dental-clinic.onrender.com/api/v1/appointments", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
