@@ -18,7 +18,8 @@ public class WebConfig {
         configuration.setAllowedOrigins(
             List.of(
                 "http://localhost:3000",
-                "https://san-rafael-six.vercel.app"
+                "https://san-rafael-six.vercel.app",
+                "https://san-rafael-dental-clinic.vercel.app"
             )
         );
 
