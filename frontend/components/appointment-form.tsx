@@ -235,6 +235,8 @@ export default function AppointmentForm() {
           "Content-Type": "application/json",
         },
         body: JSON.stringify(payload),
+        credentials: "include",
+        mode: "cors",
       })
 
       if (!res.ok) {
