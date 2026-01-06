@@ -12,6 +12,10 @@ import io.github.resilience4j.ratelimiter.annotation.RateLimiter;
 
 import java.util.Map;
 
+@CrossOrigin(
+  origins = "https://san-rafael-dental-clinic.vercel.app",
+  allowCredentials = "true"
+)
 @RestController
 @RequestMapping("/api/v1/appointments")
 @RequiredArgsConstructor
