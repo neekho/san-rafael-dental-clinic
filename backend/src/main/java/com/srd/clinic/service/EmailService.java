@@ -28,11 +28,11 @@ public class EmailService {
 
     private final EmailTemplateCache emailTemplateCache;
 
-    @Async
+    @Async("taskExecutor")
     public CompletableFuture<Void> sendAppointmentEmailHtml(AppointmentRequest req, String[] to) {
         try {
             long start = System.currentTimeMillis();
-            log.info("preparing appointment email asynchronously");
+            log.info("Starting async email send for appointment from {} {}", req.getFirstName(), req.getLastName());
 
             MimeMessage mimeMessage = mailSender.createMimeMessage();
             MimeMessageHelper helper = new MimeMessageHelper(mimeMessage, true, "UTF-8");
@@ -61,12 +61,17 @@ public class EmailService {
 
             long sendStart = System.currentTimeMillis();
             mailSender.send(mimeMessage);
-            log.info("SMTP send took {} ms", System.currentTimeMillis() - sendStart);
-            log.info("EmailService completed in {} ms", System.currentTimeMillis() - start);
+            long emailDuration = System.currentTimeMillis() - sendStart;
+            long totalDuration = System.currentTimeMillis() - start;
+            
+            log.info("✅ Email sent successfully! SMTP took {} ms, Total async task: {} ms", emailDuration, totalDuration);
             
             return CompletableFuture.completedFuture(null);
         } catch (MessagingException e) {
-            log.error("Failed to send appointment email", e);
+            log.error("❌ Failed to send appointment email to {}", String.join(",", to), e);
+            return CompletableFuture.failedFuture(e);
+        } catch (Exception e) {
+            log.error("❌ Unexpected error in async email sending", e);
             return CompletableFuture.failedFuture(e);
         }
     }
