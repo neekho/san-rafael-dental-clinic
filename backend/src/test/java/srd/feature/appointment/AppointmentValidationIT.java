@@ -174,7 +174,7 @@ class AppointmentValidationIT extends ClinicApplicationTest {
     when(captchaService.verify(anyString())).thenReturn(true);
 
     AppointmentRequest request = createValidRequest().toBuilder()
-        .preferredDate("2026-02-01") // Use February to avoid January special case
+        .preferredDate("2027-02-01") // Use February to avoid January special case
         .build();
 
     ResultActions ra = testApiValidationError(request, POST_APPOINTMENT);

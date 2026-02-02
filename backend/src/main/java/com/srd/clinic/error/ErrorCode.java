@@ -1,5 +1,7 @@
 package com.srd.clinic.error;
 
+import java.time.Year;
+
 public class ErrorCode {
     // First Name validation messages
     public static final String FIRST_NAME_REQUIRED = "First name is required";
@@ -24,7 +26,7 @@ public class ErrorCode {
     public static final String DATE_REQUIRED = "Preferred date is required";
     public static final String DATE_INVALID_FORMAT = "Invalid date format. Use YYYY-MM-DD";
     public static final String DATE_PAST_NOT_ALLOWED = "Cannot book appointments for past dates";
-    public static final String DATE_YEAR_LIMIT_EXCEEDED = "Appointments can only be booked within 2025";
+    public static final String DATE_YEAR_LIMIT_EXCEEDED = "Appointments can only be booked within " + Year.now().getValue();
     
     // Time validation messages
     public static final String TIME_REQUIRED = "Preferred time is required";

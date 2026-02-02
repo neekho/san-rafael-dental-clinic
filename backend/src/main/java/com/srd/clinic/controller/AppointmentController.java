@@ -3,7 +3,6 @@ package com.srd.clinic.controller;
 import com.srd.clinic.dto.AppointmentRequest;
 import com.srd.clinic.service.AppointmentService;
 
-import jakarta.mail.MessagingException;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
@@ -13,7 +12,7 @@ import io.github.resilience4j.ratelimiter.annotation.RateLimiter;
 import java.util.Map;
 
 @CrossOrigin(
-  origins = "https://san-rafael-dental-clinic.vercel.app",
+  origins = {"https://san-rafael-dental-clinic.vercel.app", "http://localhost:3000"},
   allowCredentials = "true"
 )
 @RestController
@@ -25,7 +24,7 @@ public class AppointmentController {
 
     @PostMapping
     @RateLimiter(name = "createAppointment")
-    public ResponseEntity<?> createAppointment(@Valid @RequestBody AppointmentRequest request) throws MessagingException {
+    public ResponseEntity<?> createAppointment(@Valid @RequestBody AppointmentRequest request) {
         appointmentService.process(request);
         return ResponseEntity.ok(Map.of("status", "success", "message", "Appointment submitted successfully"));
     }

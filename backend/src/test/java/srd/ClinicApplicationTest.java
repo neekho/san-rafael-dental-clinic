@@ -42,35 +42,35 @@ public abstract class ClinicApplicationTest {
       .contentType(MediaType.APPLICATION_JSON)
       .content(objectMapper.writeValueAsString(request))
       .servletPath(path))
-    .andExpect(status().isOk())
-    .andDo(print());
+      .andExpect(status().isOk())
+      .andDo(print());
   }
 
   protected <T> ResultActions testApiError(T request, String path) throws Exception {
-return mockMvc.perform(post(path)
-  .contentType(MediaType.APPLICATION_JSON)
-  .content(objectMapper.writeValueAsString(request))
-  .servletPath(path))
- .andExpect(status().isBadRequest())
- .andDo(print());
-}
+    return mockMvc.perform(post(path)
+      .contentType(MediaType.APPLICATION_JSON)
+      .content(objectMapper.writeValueAsString(request))
+      .servletPath(path))
+      .andExpect(status().isBadRequest())
+      .andDo(print());
+  }
 
   protected <T> ResultActions testApiValidationError(T request, String path) throws Exception {
-return mockMvc.perform(post(path)
-  .contentType(MediaType.APPLICATION_JSON)
-  .content(objectMapper.writeValueAsString(request))
-  .servletPath(path))
- .andExpect(status().isBadRequest())
- .andDo(print());
-}
+    return mockMvc.perform(post(path)
+      .contentType(MediaType.APPLICATION_JSON)
+      .content(objectMapper.writeValueAsString(request))
+      .servletPath(path))
+      .andExpect(status().isBadRequest())
+      .andDo(print());
+  }
 
   protected <T> ResultActions testApiConfigurationError(T request, String path) throws Exception {
-return mockMvc.perform(post(path)
-  .contentType(MediaType.APPLICATION_JSON)
-  .content(objectMapper.writeValueAsString(request))
-  .servletPath(path))
- .andExpect(status().isInternalServerError())
- .andDo(print());
-}
+    return mockMvc.perform(post(path)
+      .contentType(MediaType.APPLICATION_JSON)
+      .content(objectMapper.writeValueAsString(request))
+      .servletPath(path))
+      .andExpect(status().isInternalServerError())
+      .andDo(print());
+  }
   
 }
