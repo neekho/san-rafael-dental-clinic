@@ -1,7 +1,7 @@
 export const seoKeywords = [
   // Primary local keywords
   "dentist Mandaluyong",
-  "dental clinic Mandaluyong City", 
+  "dental center Mandaluyong City", 
   "Plainview dentist",
   "Shaw Boulevard dental",
   "Metro Manila dentist",
@@ -19,20 +19,20 @@ export const seoKeywords = [
   
   // Neighborhood and area keywords
   "dentist near Shaw Boulevard",
-  "dental clinic Plainview",
+  "dental center Plainview",
   "family dentist Metro Manila",
   "affordable dentist Mandaluyong",
-  "best dentist Mandaluyong City",
+  "quality dentist Mandaluyong City",
   
-  // Clinic-specific
-  "San Rafael dental clinic",
+  // Center-specific
+  "San Rafael dental center",
   "Dr. Ronald Remulla",
   "93B San Rafael Street dentist"
 ];
 
 export const localBusinessInfo = {
-  name: "San Rafael Dental Clinic",
-  description: "Leading dental clinic in Mandaluyong City offering comprehensive dental services",
+  name: "San Rafael Dental Center",
+  description: "Professional dental center in Mandaluyong City offering comprehensive dental services",
   address: {
     street: "93B San Rafael Street",
     area: "Plainview",

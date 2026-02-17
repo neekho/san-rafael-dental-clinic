@@ -31,7 +31,7 @@ export default function Services() {
         <div className="text-center mb-16">
           <h2 className="text-3xl md:text-5xl font-bold text-foreground mb-4">Dental Services in Mandaluyong City</h2>
           <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
-            Comprehensive dental care for families in Plainview, Shaw Boulevard, and Metro Manila. Expert treatments with modern technology and compassionate care since 1999.
+            Comprehensive dental care for families in Plainview, Shaw Boulevard, and Metro Manila. Professional treatments with modern technology and compassionate care since 1999.
           </p>
         </div>
 

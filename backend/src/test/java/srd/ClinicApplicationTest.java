@@ -9,8 +9,8 @@ import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.ResultActions;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.srd.clinic.service.AppointmentService;
+import com.srd.clinic.service.BrevoEmailService;
 import com.srd.clinic.service.CaptchaService;
-import com.srd.clinic.service.EmailService;
 
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
@@ -33,7 +33,7 @@ public abstract class ClinicApplicationTest {
   protected CaptchaService captchaService;
 
   @MockBean
-  protected EmailService emailService;
+  protected BrevoEmailService brevoEmailService;
 
   public static final String POST_APPOINTMENT = "/api/v1/appointments";
 

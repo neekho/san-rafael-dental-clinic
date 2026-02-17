@@ -4,28 +4,28 @@ const testimonials = [
   {
     name: "Hayde Cestina",
     role: "Mandaluyong Patient",
-    text: "Dr. Ronald Remulla and the team at San Rafael Dental made me feel so comfortable. The teeth whitening treatment in their Plainview clinic made a huge difference!",
+    text: "Dr. Ronald Remulla and the team at San Rafael Dental Center made me feel so comfortable. The teeth whitening treatment in their Plainview clinic made a huge difference!",
     rating: 5,
     avatar: "/placeholder-user.jpg",
   },
   {
     name: "Rachelle Ambrosio",
     role: "Shaw Boulevard Resident",
-    text: "Best dental experience I've ever had in Metro Manila. Professional, friendly staff at San Rafael Dental in Mandaluyong, and they took time to explain everything.",
+    text: "Excellent dental care in Metro Manila. Professional, friendly staff at San Rafael Dental Center in Mandaluyong, and they took time to explain everything.",
     rating: 5,
     avatar: "/placeholder-user.jpg",
   },
   {
     name: "Aubrey Lucero",
     role: "Plainview Resident",
-    text: "My dental implant at San Rafael Dental Clinic looks and feels completely natural. Best dental care in Mandaluyong City. I couldn't be happier with the results!",
+    text: "My dental implant at San Rafael Dental Center looks and feels completely natural. Quality dental care in Mandaluyong City. I couldn't be happier with the results!",
     rating: 5,
     avatar: "/placeholder-user.jpg",
   },
   {
     name: "Marissa Watanabe",
     role: "Metro Manila Patient",
-    text: "No more dental anxiety! Dr. Ronald Remulla and the team's care and attention to detail at their Mandaluyong clinic is absolutely outstanding.",
+    text: "No more dental anxiety! Dr. Ronald Remulla and the team's care and attention to detail at their Mandaluyong clinic is truly professional.",
     rating: 5,
     avatar: "/placeholder-user.jpg",
   },
@@ -37,7 +37,7 @@ export default function Testimonials() {
       <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Header */}
         <div className="text-center mb-16">
-          <h2 className="text-3xl md:text-5xl font-bold text-foreground mb-4">Patient Reviews - Mandaluyong's Trusted Dentist</h2>
+          <h2 className="text-3xl md:text-5xl font-bold text-foreground mb-4">Patient Reviews - Your Mandaluyong Dental Center</h2>
           <p className="text-lg text-muted-foreground">
             Don't just take our word for it - hear from our satisfied patients in Plainview, Shaw Boulevard, and Metro Manila
           </p>

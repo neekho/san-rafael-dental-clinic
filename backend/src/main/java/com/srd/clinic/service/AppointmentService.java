@@ -16,7 +16,7 @@ public class AppointmentService {
     private CaptchaService captchaService;
 
     @Autowired
-    private EmailService emailService;
+    private BrevoEmailService brevoEmailService;
 
     @Value("${clinic.notification.email:}")
     private String[] clinicEmail;
@@ -39,7 +39,7 @@ public class AppointmentService {
         throw new ConfigurationException("Clinic email is not configured (clinic.notification.email)");
 
     long emailStart = System.currentTimeMillis();
-    emailService.sendAppointmentEmailHtml(req, clinicEmail);
+    brevoEmailService.sendAppointmentEmailHtml(req, clinicEmail);
     log.info("Email sending initiated (async) in {} ms ", System.currentTimeMillis() - emailStart);
     
     log.info("appointment processing completed in {} ms ", System.currentTimeMillis() - start);

@@ -237,11 +237,7 @@ export default function AppointmentForm() {
         body: JSON.stringify(payload),
         credentials: "include",
         mode: "cors",
-      }).then(r => {
-  console.log("STATUS:", r.status);
-  console.log("HEADERS:", [...r.headers.entries()]);
-})
-.catch(err => console.error("ERROR:", err));
+      })
 
       if (!res.ok) {
         const errorData = await res.json()

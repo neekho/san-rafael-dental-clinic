@@ -9,10 +9,10 @@ const _geistMono = Geist_Mono({ subsets: ["latin"] })
 
 export const metadata: Metadata = {
   title: {
-    default: "San Rafael Dental Clinic Mandaluyong - Best Dentist in Plainview",
-    template: "%s | San Rafael Dental Clinic Mandaluyong"
+    default: "San Rafael Dental Center Mandaluyong - Best Dentist in Plainview",
+    template: "%s | San Rafael Dental Center Mandaluyong"
   },
-  description: "Leading dental clinic in Mandaluyong City offering professional dental services including cleanings, fillings, root canals, crowns, implants, and cosmetic dentistry. Serving Plainview, Shaw Boulevard, and surrounding Metro Manila areas since 1999.",
+  description: "Leading dental center ein Mandaluyong City offering professional dental services including cleanings, fillings, root canals, crowns, implants, and cosmetic dentistry. Serving Plainview, Shaw Boulevard, and surrounding Metro Manila areas since 1999.",
   keywords: [
     "dentist Mandaluyong",
     "dental clinic Mandaluyong City",
@@ -27,9 +27,9 @@ export const metadata: Metadata = {
     "dental checkup Mandaluyong",
     "San Rafael dental clinic"
   ],
-  authors: [{ name: "San Rafael Dental Clinic" }],
-  creator: "San Rafael Dental Clinic",
-  publisher: "San Rafael Dental Clinic",
+  authors: [{ name: "San Rafael Dental Center" }],
+  creator: "San Rafael Dental Center",
+  publisher: "San Rafael Dental Center",
   formatDetection: {
     email: false,
     address: false,
@@ -40,10 +40,10 @@ export const metadata: Metadata = {
     canonical: "/",
   },
   openGraph: {
-    title: "San Rafael Dental Clinic - Premier Dentist in Mandaluyong City",
+    title: "San Rafael Dental Center - Professional Dentist in Mandaluyong City",
     description: "Expert dental care in Mandaluyong's Plainview area. Professional cleanings, cosmetic dentistry, implants & more. Book your appointment today!",
     url: "https://sanrafaeldental.com",
-    siteName: "San Rafael Dental Clinic",
+    siteName: "San Rafael Dental Center",
     locale: "en_PH",
     type: "website",
     images: [
@@ -51,13 +51,13 @@ export const metadata: Metadata = {
         url: "/modern-dental-office.png",
         width: 1200,
         height: 630,
-        alt: "San Rafael Dental Clinic - Modern dental office in Mandaluyong",
+        alt: "San Rafael Dental Center - Modern dental office in Mandaluyong",
       },
     ],
   },
   twitter: {
     card: "summary_large_image",
-    title: "San Rafael Dental Clinic - Best Dentist in Mandaluyong",
+    title: "San Rafael Dental Center",
     description: "Professional dental services in Mandaluyong City. Expert care for cleanings, cosmetic dentistry, implants & more.",
     images: ["/modern-dental-office.png"],
   },
@@ -76,7 +76,7 @@ export const metadata: Metadata = {
     google: "your-google-verification-code",
   },
   generator: "Next.js",
-  applicationName: "San Rafael Dental Clinic",
+  applicationName: "San Rafael Dental Center",
   referrer: "origin-when-cross-origin",
   category: "Healthcare",
   classification: "Dental Services",

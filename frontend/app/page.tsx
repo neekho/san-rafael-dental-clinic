@@ -14,9 +14,9 @@ export default function Home() {
   const jsonLd = {
     "@context": "https://schema.org",
     "@type": "DentalClinic",
-    "name": "San Rafael Dental Clinic",
+    "name": "San Rafael Dental Center",
     "alternateName": "San Rafael Dental Care Mandaluyong",
-    "description": "Leading dental clinic in Mandaluyong City offering comprehensive dental services including cleanings, cosmetic dentistry, implants, and emergency care.",
+    "description": "Professional dental center in Mandaluyong City offering comprehensive dental services including cleanings, cosmetic dentistry, implants, and emergency care.",
     "url": "https://sanrafaeldental.com",
     "telephone": "+639178014040",
     "email": "hello@srdentalcare.com",

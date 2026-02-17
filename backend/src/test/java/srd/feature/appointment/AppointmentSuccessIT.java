@@ -37,8 +37,8 @@ class AppointmentSuccessIT extends ClinicApplicationTest {
         // Mock the captcha service to return true (valid captcha)
         when(captchaService.verify(anyString())).thenReturn(true);
         
-        // Mock the email service to return a completed future (successful async email send)
-        when(emailService.sendAppointmentEmailHtml(any(AppointmentRequest.class), any(String[].class)))
+        // Mock the Brevo email service to return a completed future (successful async email send)
+        when(brevoEmailService.sendAppointmentEmailHtml(any(AppointmentRequest.class), any(String[].class)))
             .thenReturn(CompletableFuture.completedFuture(null));
 
         // When - Make the appointment request

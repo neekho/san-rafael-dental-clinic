@@ -12,10 +12,10 @@ export default function Footer() {
           <div>
             <div className="flex items-center gap-2 mb-4">
 
-              <h3 className="font-bold">San Rafael Dental Clinic</h3>
+              <h3 className="font-bold">San Rafael Dental Center</h3>
             </div>
             <p className="text-sm opacity-90">
-              Providing exceptional dental care to Mandaluyong City, Plainview, Shaw Boulevard, and Metro Manila families since 1999. Your trusted neighborhood dentist.
+              Providing quality dental care to Mandaluyong City, Plainview, Shaw Boulevard, and Metro Manila families since 1999. Your trusted neighborhood dental center.
             </p>
           </div>
 
@@ -101,7 +101,7 @@ export default function Footer() {
 
         {/* Bottom Footer */}
         <div className="flex flex-col md:flex-row justify-between items-center py-8 gap-4">
-          <p className="text-sm opacity-90">Copyright {currentYear} San Rafael Dental Clinic Mandaluyong. Serving Plainview, Shaw Boulevard & Metro Manila. All rights reserved.</p>
+          <p className="text-sm opacity-90">Copyright {currentYear} San Rafael Dental Center Mandaluyong. Serving Plainview, Shaw Boulevard & Metro Manila. All rights reserved.</p>
           <div className="flex items-center gap-4">
             <a href="https://www.facebook.com/profile.php?id=100084249220187" className="opacity-90 hover:opacity-100 transition-opacity" aria-label="Facebook">
               <Facebook className="w-5 h-5" />
