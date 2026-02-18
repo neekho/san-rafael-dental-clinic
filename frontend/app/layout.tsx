@@ -9,7 +9,7 @@ const _geistMono = Geist_Mono({ subsets: ["latin"] })
 
 export const metadata: Metadata = {
   title: {
-    default: "San Rafael Dental Center Mandaluyong - Best Dentist in Plainview",
+    default: "San Rafael Dental Center Mandaluyong - Professional Dental care in Mandaluyong City",
     template: "%s | San Rafael Dental Center Mandaluyong"
   },
   description: "Leading dental center ein Mandaluyong City offering professional dental services including cleanings, fillings, root canals, crowns, implants, and cosmetic dentistry. Serving Plainview, Shaw Boulevard, and surrounding Metro Manila areas since 1999.",
@@ -73,7 +73,7 @@ export const metadata: Metadata = {
     },
   },
   verification: {
-    google: "your-google-verification-code",
+    google: "ux2WwsR_Stfo5xSYMPsdwLtUkyRWUWp_K3KDxzmDKHk",
   },
   generator: "Next.js",
   applicationName: "San Rafael Dental Center",
