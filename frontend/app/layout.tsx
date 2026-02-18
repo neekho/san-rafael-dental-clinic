@@ -35,14 +35,14 @@ export const metadata: Metadata = {
     address: false,
     telephone: false,
   },
-  metadataBase: new URL("https://sanrafaeldental.com"),
+  metadataBase: new URL("https://san-rafael-dental-clinic.vercel.app"),
   alternates: {
     canonical: "/",
   },
   openGraph: {
     title: "San Rafael Dental Center - Professional Dentist in Mandaluyong City",
     description: "Expert dental care in Mandaluyong's Plainview area. Professional cleanings, cosmetic dentistry, implants & more. Book your appointment today!",
-    url: "https://sanrafaeldental.com",
+    url: "https://san-rafael-dental-clinic.vercel.app",
     siteName: "San Rafael Dental Center",
     locale: "en_PH",
     type: "website",
